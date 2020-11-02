@@ -1,0 +1,58 @@
+ Мы залогинились www.testbank.com - онлайн банкинг
+ При переводе денег у нас будет всегда формироваться нижеследующий url
+ http://www.testbank.com/transfer?to=<НомерСчета>;amount=<Сумма Перевода>
+
+Допустим параллельно мы зашли на другой, так как у них реклама интересная
+www.cheapshop.com
+Но мы не знаем, что на сайте cheapshop.com, прикреплен вредоносный код
+
+http://www.testbank.com/transfer?to=2131253456;amount=10000
+
+{% csrf_token %}
+
+http://www.testbank.com/transfer?to=21345;amount=5000;token=2134567sdfxghj3245678xcdsfgh24354657asdfgh
+
+
+
+
+
+
+
+
+System check identified no issues (0 silenced).
+November 02, 2020 - 14:37:26
+Django version 2.2.1, using settings 'main.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Types of method:  POST
+POST
+/application-form/create/
+<MultiValueDict: {}>
+b'csrfmiddlewaretoken=WYcI0BF9s5JUsyFsCSK8nqTTP6xkPPKqdttLG1l2KtZOs7o5v0zWpl1AdD75s2mX'
+http://localhost:8000/application-form/create/
+/application-form/create/
+localhost:8000
+8000
+<WSGIRequest: POST '/application-form/create/'>
+[02/Nov/2020 14:39:25] "POST /application-form/create/? HTTP/1.1" 200 2029
+[02/Nov/2020 14:39:26] "GET /static/css/app_form.css HTTP/1.1" 304 0
+
+
+
+
+
+
+
+
+
+
+
+<QueryDict: {'csrfmiddlewaretoken': ['BXqvzKyJJIpUfgxRPYxcd2F1NCsDXsnISsHyfaeC16FOfPguI6m0fXNIb92oAFZf']}>
+
+
+<QueryDict: {'csrfmiddlewaretoken': ['0GjRdWKgvQsGAhViGD4rqubM9cgTdIFGhbAUTmq9NeIAAQEVzLTfspjtxJQEQVhd'], 'email': ['alymbekovdastan1@gmail.com'], 'address': ['12 mkr 15'], 'city': ['Bishkek'], 'check': ['on']}>
+
+
+
+
+

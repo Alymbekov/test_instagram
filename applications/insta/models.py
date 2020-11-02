@@ -44,4 +44,18 @@ class HashTag(models.Model):
         return f"{self.title}"
 
 
+class ApplicationForm(models.Model):
+    email = models.EmailField()
+    address = models.CharField(max_length=255)
+    city = models.CharField(max_length=100)
+    check = models.BooleanField(default=False)
 
+    def __str__(self):
+        return f"{self.email}, {self.city}"
+
+    @staticmethod
+    def is_check_true(status):
+        if status == 'on':
+            return True
+        else:
+            return False
