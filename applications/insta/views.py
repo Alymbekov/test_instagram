@@ -76,3 +76,5 @@ def new_application_form(request):
             )
             return redirect('new_form')
     return render(request, 'insta/new_form.html', locals())
+
+
