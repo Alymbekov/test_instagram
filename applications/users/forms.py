@@ -1,5 +1,7 @@
 from django import forms
 
+from applications.users.models import Person
+
 
 class UserSearchForm(forms.Form):
     name = forms.CharField(
@@ -26,3 +28,9 @@ class NewSearchForm(forms.Form):
             attrs={"checked": ""}
         )
     )
+
+
+class PersonModelForm(forms.ModelForm):
+    class Meta:
+        model = Person
+        fields = ('first_name', 'last_name', )

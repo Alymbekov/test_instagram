@@ -1,7 +1,8 @@
 from django.db.models import Q
-from django.shortcuts import render
+from django.forms import forms
+from django.shortcuts import render, redirect
 from applications.users.forms import (
-    UserSearchForm, NewSearchForm
+    UserSearchForm, NewSearchForm, PersonModelForm
 )
 from .models import (
     User, Profile
@@ -45,21 +46,41 @@ def search(request):
     search = request.GET.get("text", None)
     users = User.objects.none()
     if search:
-        first_name = ''
-        last_name = ''
+        first_name = Q(first_name__icontains=search)
+        last_name = Q(last_name__icontains=search)
+        search_test = None
         search_by = request.GET.getlist('search_by')
-
-        if 'first_name' in search_by:
-            users = users.union(User.objects.filter(
-                Q(first_name__icontains=search)
-            ))
-            print(users)
-            print("FN")
-        if 'last_name' in search_by:
-            users = users.union(User.objects.filter(
-                Q(last_name__icontains=search)
-            ))
-            print(users)
-            print("LN")
-    print(users)
+        if 'first_name' in search_by and 'last_name' in search_by:
+            search_test = first_name | last_name
+            print("both", search_test)
+        elif 'first_name' in search_by:
+            search_test = first_name
+            print("first", search_test)
+        elif 'last_name' in search_by:
+            search_test = last_name
+            print("second", search_test)
+        else:
+            checkbox_error = 'Чебоксы должны быть не пустыми'
+            raise forms.ValidationError(checkbox_error)
+        users = User.objects.filter(search_test)
+        print("result", users)
     return render(request, 'users/new_search.html', locals())
+
+#ModelForm
+def add_person(request):
+    form = PersonModelForm()
+    if request.method == 'POST':
+        form = PersonModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('users:test_model_form')
+    return render(request, 'users/test_model_form.html', locals())
+
+
+
+
+
+
+
+
+
